@@ -1,0 +1,52 @@
+{% extends 'store/base.html' %}
+{% block content %}
+    <h3>Welcome {{ request.user }}</h3>
+    <div class="container">
+        <div class="h4 pb-2 mb-4 text-danger text-center border-bottom border-danger my-3">Cart</div>
+
+        {% for i in data %}
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ i.item.product_image.url }}" class="img-fluid rounded-start" alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-title">
+                                {{ i.item.name }}
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Description: {{ i.item.description }}</li>
+                                <li class="list-group-item"> <strong>&#8377;{{i.item.selling_price}}</strong>
+                                    <s class="text-muted"><span>&#8377;</span</>  {{ i.item.original_price }}</s></span>
+                                    <span class="text-danger">({{i.item.offer}}&#37;off)</span></li>
+
+                                <li class="list-group-item">
+                                   
+                                    Quantity: <div class="dropdown">
+                                        <button class="btn btn-success dropdown-toggle" type="button"
+                                                id="quantityDropdown" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            {{ i.cart_quantity }}
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="quantityDropdown">
+                                            <!-- Add dropdown items here -->
+                                            <a class="dropdown-item" href="#">1</a>
+                                            <a class="dropdown-item" href="#">2</a>
+                                            <a class="dropdown-item" href="#">3</a>
+                                            <!-- Add more items as needed -->
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="{% url 'order' i.item.id %}" class="btn btn-primary">Buy Now</a>
+                                    <a href="{% url 'cart_delete' i.id %}" class="btn btn-danger ml-2">Remove</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

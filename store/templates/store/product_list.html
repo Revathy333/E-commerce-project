@@ -1,0 +1,71 @@
+{% extends 'store\base.html' %}
+{% load static %}
+{% block title %}
+ECOM|Products 
+{% endblock title%} 
+{% block carousel %}
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        {% if names.name == "Kids wear" %}
+       
+      <img src="{% static 'images/kidscarousel.gif' %}" class="d-block w-100" alt="..." height="500px" width="500px">
+    </div>  <div class="carousel-item">
+        <img src="{% static 'images/ZipDress.webp' %}" class="d-block w-100" alt="..." height="500px" width="500px">
+    </div>
+      
+    </div>
+      {% elif names.name == "Maternity wear" %} 
+      <img src="{% static 'images/matercarousel.webp' %}" class="d-block w-100" alt="..." height="500px" width="500px">
+
+      
+    </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/mom.webp' %}" class="d-block w-100" alt="..." height="500px" width="500px">
+      </div>
+    </div>
+    {% endif %} 
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+{% endblock carousel %}
+
+{% block content %}
+<div class="container">
+    <div class="h4 pb-2 mb-4 text-danger text-center border-bottom border-danger my-3">{{ names.name }}</div>
+
+    <div class="row">
+        {% for product in data %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="{% url 'product_data' product.id %}">
+                        <img src="{{ product.product_image.url }}" class="card-img-top" alt="..." height="350px" width="200px">
+                    </a>
+                    <div class="card-body text-center">
+                        <p class="card-title">{{ product.name }}</p>
+                    </div>
+                    <div class="card-body text-center">
+                        
+                        <p class="card-text "><span>
+                            <strong>&#8377;{{ product.selling_price}}</strong>
+                            <s class="text-muted"><span>&#8377;</span</>  {{ product.original_price }}</s></span>
+                            <span class="text-danger">({{product.offer}}&#37;off)</span></p>
+                        <!-- <p class="card-text">{{ product.description }}</p> -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

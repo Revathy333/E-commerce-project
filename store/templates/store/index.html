@@ -1,0 +1,26 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}
+MAINECOMMERCE|online shopping
+{% endblock %}
+{% block content %}
+
+<div class="container"   style="background-color: #ffcccc;">
+    <div class="h4 pb-2 mb-4 text-danger text-center border-bottom border-danger my-3">Categories</div>
+    
+    <div class="row">
+        {% for item in categories %}
+        <div class="col-md-3">
+            <a href="{% url 'product_list' item.id %}" class="card mb-4">
+                <img src="{{ item.image.url }}" class="card-img-top" alt="..." height="300px" width="400px">
+                <div class="card-body">
+                    <p class="card-text">{{ item.name }}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
+

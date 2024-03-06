@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+</head>
+{%load static%}
+<body>
+    <h1>Your Orders</h1>
+
+    {% if data %}
+        <ul>
+            {% for order in data %}
+                <li>
+                    <div style="display: flex;">
+                        <div style="margin-right: 20px;">
+                            <img src="{{ order.order_item.product_image.url }}" alt="{{ order_item.order_item.name }}" style="max-width: 100px; max-height: 100px;">
+                        </div>
+                    Order ID: {{ order.id }}<br>
+                    Product: {{ order.order_item.name }}<br>
+                    Date: {{ order.date }}<br>
+                    Order Status: {{ order.order_status }}<br>
+                    Address: {{ order.address }}<br>
+                    Price: {{ order.price }}<br>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No orders found.</p>
+    {% endif %}
+</body>
+</html>

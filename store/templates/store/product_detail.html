@@ -1,0 +1,28 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="product-details-container  display: flex;
+  flex-wrap: wrap;">
+    {% for product in products_data %}
+      <div class="product-details ms-3 margin: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);">
+        <img src="{{ product.product_image.url }}" alt="{{ product.name }}">
+
+        <div class="product-info  margin-top: 10px;">
+          <h3>{{ product.name }}</h3>
+          <p>Category: {{ product.category }}</p>
+          <p>Original Price:<s> &#8377;{{ product.original_price }}</s></p>
+          <p>Selling Price: &#8377;{{ product.selling_price }}</p>
+          <p>Description: {{ product.description }}</p>
+          <div class="mb-2 ms-2 mb-4" role="group" aria-label="Product Actions">
+            <a href="{% url 'cart' product.id %}" class="btn btn-warning mr-3 btn-lg text-light" ><i class="fa-solid fa-cart-shopping"></i>  Add to Cart</a>
+            <a href="{% url 'order' product.id %}" class="btn text-light btn-lg" style="background-color: #FF8C00;"><i class="fa-solid fa-bag-shopping"></i>  Buy Now</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
